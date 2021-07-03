@@ -73,7 +73,7 @@ ggplot(subset(cusum, max.proj.cusum > 12.553), aes(location, log(max.proj.cusum)
 dev.off()
 
 
-
+## Supplementary
 ggplot(interest.rate, aes(R3M, R5Y, colour = as.factor(segment))) +
   geom_point(alpha = 2/5)+
   scale_colour_viridis_d(option = 'C') 
@@ -91,4 +91,21 @@ ggplot(interest.rate, aes(as.Date(row.names(interest.rate), '%Y/%m/%d'), diff,
 )) +
   geom_line() +
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") 
+
+
+## Steps for interest rate
+
+#summary(interest.rate$R1Y)
+CairoPDF('R1Y_Step.pdf', 12, 7.4)
+ggplot(interest.rate[cusum$location[1:163],], aes(location, R1Y)) +
+  geom_step(colour = "red", size = 1, direction = "hv") +
+  scale_x_continuous(breaks = c(0, 305, 673, 843, 1185, 1424, 1864, 2223, 2442, 2783, 3109)) +
+  #geom_hline(yintercept = 2.8116, linetype = 'dashed', color = '#56B4E9', size = 0.8) +
+  geom_hline(yintercept = 2.1346, linetype = 'dashed', color = '#56B4E9', size = 0.8) +
+  geom_hline(yintercept = 3.3298, linetype = 'dashed', color = '#56B4E9', size = 0.8)
+dev.off()
+#                     lables = c("2006/3/1",
+#                                "2007/5/18", "2008/11/4", "2009/7/9",  "2010/11/22", "2011/11/7", 
+#                                "2013/8/8",  "2015/1/15", "2015/12/3", "2017/4/14" ,
+#                                "2018/7/31"))
 
